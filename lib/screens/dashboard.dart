@@ -28,17 +28,12 @@ class Dashboard extends StatelessWidget {
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25)),
               ),
-              child: Graphs(),
+              child: const Graphs(),
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 3,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Calendar(),
-            ),
+            child: Calendar(),
           )
         ],
       ),

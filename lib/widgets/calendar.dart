@@ -14,6 +14,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   List<String> toHighlight = [];
 
+  @override
   void initState() {
     getData();
     super.initState();
@@ -128,12 +129,12 @@ class _CalendarState extends State<Calendar> {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13.0))),
-                backgroundColor: MaterialStateProperty.all(light),
+                backgroundColor: MaterialStateProperty.all(apnaLight),
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
               ),
               child: const Text("Take Test",
-                  style: TextStyle(fontSize: 20, color: dark)),
+                  style: TextStyle(fontSize: 20, color: apnaDark)),
             ),
           ],
         ),

@@ -1,52 +1,103 @@
-import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:therapia/constants/colors.dart';
-
 class GraphModel {
-  String day;
+  num day;
   double tremorIndex;
-  charts.Color colour;
 
   GraphModel({
     required this.day,
     required this.tremorIndex,
-    required this.colour,
   });
 
-  static List<GraphModel> data = [
+  static List<GraphModel> weekData = [
     GraphModel(
-      day: '17',
-      tremorIndex: 5.0,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 1,
+      tremorIndex: 0.9,
     ),
     GraphModel(
-      day: '18',
-      tremorIndex: 4.8,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 2,
+      tremorIndex: 0.6,
     ),
     GraphModel(
-      day: '19',
-      tremorIndex: 4.7,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 3,
+      tremorIndex: 0.7,
     ),
     GraphModel(
-      day: '20',
-      tremorIndex: 4.2,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 4,
+      tremorIndex: 0.7,
     ),
     GraphModel(
-      day: '21',
-      tremorIndex: 3.8,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 5,
+      tremorIndex: 0.5,
     ),
     GraphModel(
-      day: '22',
-      tremorIndex: 4.1,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 6,
+      tremorIndex: 0.4,
     ),
     GraphModel(
-      day: '23',
-      tremorIndex: 3.5,
-      colour: charts.ColorUtil.fromDartColor(apnaDark),
+      day: 7,
+      tremorIndex: 0.6,
+    ),
+  ];
+
+  static List<GraphModel> monthData = [
+    GraphModel(
+      day: 1,
+      tremorIndex: 0.9,
+    ),
+    GraphModel(
+      day: 2,
+      tremorIndex: 0.6,
+    ),
+    GraphModel(
+      day: 3,
+      tremorIndex: 0.7,
+    ),
+    GraphModel(
+      day: 4,
+      tremorIndex: 0.7,
+    ),
+    GraphModel(
+      day: 5,
+      tremorIndex: 0.5,
+    ),
+    GraphModel(
+      day: 6,
+      tremorIndex: 0.4,
+    ),
+    GraphModel(
+      day: 7,
+      tremorIndex: 0.6,
+    ),
+    GraphModel(
+      day: 8,
+      tremorIndex: 0.8,
+    ),
+    GraphModel(
+      day: 9,
+      tremorIndex: 0.3,
+    ),
+    GraphModel(
+      day: 10,
+      tremorIndex: 0.3,
+    ),
+    GraphModel(
+      day:11,
+      tremorIndex: 0.2,
+    ),
+    GraphModel(
+      day: 12,
+      tremorIndex: 0.2,
+    ),
+    GraphModel(
+      day: 13,
+      tremorIndex: 0.4,
+    ),
+    GraphModel(
+      day: 14,
+      tremorIndex: 0.1,
+    ),
+    GraphModel(
+      day: 15,
+      tremorIndex: 0.3,
     ),
   ];
 }

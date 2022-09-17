@@ -17,14 +17,6 @@ class _TestState extends State<Test> {
   List<double> _accelerometerValues = [0, 0, 0];
   Timer? timer;
 
-  void cancelSub() {
-    void cancelSubscriptions() {
-      for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
-        subscription.cancel();
-      }
-    }
-  }
-
   void startTimer() {
     timer = Timer.periodic(
       const Duration(seconds: 1),
@@ -62,15 +54,14 @@ class _TestState extends State<Test> {
 
     _streamSubscriptions
         .add(accelerometerEvents.listen((AccelerometerEvent event) {
-      print(event);
+          _accelerometerValues = <double>[event.x, event.y, event.z];
     }));
+  }
 
-    // userAccelerometerEvents.listen((UserAccelerometerEvent event) {
-    //   print(event);
-    //   // setState(() {
-    //   //   _accelerometerValues = <double>[event.x, event.y, event.z];
-    //   // });
-    // });
+  void stopSensor() {
+    for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
   }
 
   @override
@@ -78,6 +69,7 @@ class _TestState extends State<Test> {
     return WillPopScope(
       onWillPop: () async {
         timer?.cancel();
+        stopSensor();
         return true;
       },
       child: Scaffold(
@@ -143,7 +135,7 @@ class _TestState extends State<Test> {
       return OutlinedButton(
         onPressed: (() {
           Navigator.pop(context);
-          cancelSub();
+          stopSensor();
         }),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
@@ -169,7 +161,7 @@ class _TestState extends State<Test> {
             ),
             onPressed: () {
               stopTimer();
-              cancelSub();
+              stopSensor();
               Navigator.pop(context);
             },
             child: const Icon(

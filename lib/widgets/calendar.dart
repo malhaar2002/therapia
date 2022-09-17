@@ -31,8 +31,10 @@ class _CalendarState extends State<Calendar> {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 90),
       child: Padding(
-        padding: const EdgeInsets.only(right: 20, left: 20, top: 5, bottom: 20),
+        padding: const EdgeInsets.only(right: 20, left: 20, top: 5),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TableCalendar(
               calendarBuilders: CalendarBuilders(
@@ -90,9 +92,13 @@ class _CalendarState extends State<Calendar> {
               //##################################################
               daysOfWeekStyle: const DaysOfWeekStyle(
                 weekendStyle: TextStyle(
-                    color: apnaLight, fontWeight: FontWeight.bold, fontSize: 16),
+                    color: apnaLight,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
                 weekdayStyle: TextStyle(
-                    color: apnaLight, fontWeight: FontWeight.bold, fontSize: 16),
+                    color: apnaLight,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
               ),
               //##################################################
               headerStyle: const HeaderStyle(
@@ -129,7 +135,8 @@ class _CalendarState extends State<Calendar> {
                         borderRadius: BorderRadius.circular(13.0))),
                 backgroundColor: MaterialStateProperty.all(apnaLight),
                 padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                    const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10)),
               ),
               child: const Text("Take Test",
                   style: TextStyle(fontSize: 20, color: apnaDark)),

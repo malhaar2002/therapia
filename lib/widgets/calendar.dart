@@ -89,13 +89,9 @@ class _CalendarState extends State<Calendar> {
               //##################################################
               daysOfWeekStyle: const DaysOfWeekStyle(
                 weekendStyle: TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
+                    color: light, fontWeight: FontWeight.bold, fontSize: 16),
                 weekdayStyle: TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
+                    color: light, fontWeight: FontWeight.bold, fontSize: 16),
               ),
               //##################################################
               headerStyle: const HeaderStyle(
@@ -116,14 +112,16 @@ class _CalendarState extends State<Calendar> {
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
                 weekendTextStyle: TextStyle(color: Colors.white),
                 todayDecoration: BoxDecoration(
-                  color: Colors.white,
+                  color: light,
                   shape: BoxShape.circle,
                 ),
               ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'test');
+              },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(

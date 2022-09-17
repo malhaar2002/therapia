@@ -8,17 +8,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: apnaRed,
-      //   child: const Icon(Icons.add),
-      // ),
       backgroundColor: dark,
-      // appBar: AppBar(
-      //   backgroundColor: apnaRed,
-      //   title: const Text('Therapia'),
-      //   centerTitle: true,
-      // ),
       body: Column(
         children: [
           Expanded(

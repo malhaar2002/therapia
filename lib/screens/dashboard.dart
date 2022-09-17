@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:therapia/widgets/graphs.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -7,17 +8,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {},
-      //   backgroundColor: apnaRed,
-      //   child: const Icon(Icons.add),
-      // ),
-      backgroundColor: dark,
-      // appBar: AppBar(
-      //   backgroundColor: apnaRed,
-      //   title: const Text('Therapia'),
-      //   centerTitle: true,
-      // ),
+      backgroundColor: apnaDark,
       body: Column(
         children: [
           Expanded(
@@ -31,11 +22,12 @@ class Dashboard extends StatelessWidget {
                     color: Colors.black.withOpacity(0.5),
                   ),
                 ],
-                color: light,
+                color: apnaLight,
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25)),
               ),
+              child: Graphs(),
             ),
           ),
           Expanded(

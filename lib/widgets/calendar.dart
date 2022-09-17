@@ -12,8 +12,9 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  List<String> toHighlight = [];
+  List<String> toHighapnaLight = [];
 
+  @override
   void initState() {
     getData();
     super.initState();
@@ -21,7 +22,7 @@ class _CalendarState extends State<Calendar> {
 
   void getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    toHighlight = (await prefs.getStringList('toHighlight')) ?? [];
+    toHighapnaLight = (await prefs.getStringList('toHighapnaLight')) ?? [];
     setState(() {});
   }
 
@@ -36,8 +37,8 @@ class _CalendarState extends State<Calendar> {
             TableCalendar(
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) {
-                  if (toHighlight != []) {
-                    for (String date in toHighlight) {
+                  if (toHighapnaLight != []) {
+                    for (String date in toHighapnaLight) {
                       DateTime d = DateFormat("yyyy-MM-dd").parse(date);
                       if (day.day == d.day &&
                           day.month == d.month &&
@@ -58,8 +59,8 @@ class _CalendarState extends State<Calendar> {
                   return null;
                 },
                 todayBuilder: (context, day, focusedDay) {
-                  if (toHighlight != []) {
-                    for (String date in toHighlight) {
+                  if (toHighapnaLight != []) {
+                    for (String date in toHighapnaLight) {
                       DateTime d = DateFormat("yyyy-MM-dd").parse(date);
                       if (day.day == d.day &&
                           day.month == d.month &&
@@ -89,9 +90,9 @@ class _CalendarState extends State<Calendar> {
               //##################################################
               daysOfWeekStyle: const DaysOfWeekStyle(
                 weekendStyle: TextStyle(
-                    color: light, fontWeight: FontWeight.bold, fontSize: 16),
+                    color: apnaLight, fontWeight: FontWeight.bold, fontSize: 16),
                 weekdayStyle: TextStyle(
-                    color: light, fontWeight: FontWeight.bold, fontSize: 16),
+                    color: apnaLight, fontWeight: FontWeight.bold, fontSize: 16),
               ),
               //##################################################
               headerStyle: const HeaderStyle(
@@ -112,7 +113,7 @@ class _CalendarState extends State<Calendar> {
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
                 weekendTextStyle: TextStyle(color: Colors.white),
                 todayDecoration: BoxDecoration(
-                  color: light,
+                  color: apnaLight,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -126,12 +127,12 @@ class _CalendarState extends State<Calendar> {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(13.0))),
-                backgroundColor: MaterialStateProperty.all(light),
+                backgroundColor: MaterialStateProperty.all(apnaLight),
                 padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
               ),
               child: const Text("Take Test",
-                  style: TextStyle(fontSize: 20, color: dark)),
+                  style: TextStyle(fontSize: 20, color: apnaDark)),
             ),
           ],
         ),

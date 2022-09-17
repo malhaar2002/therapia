@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:therapia/widgets/graphs.dart';
 import 'package:therapia/widgets/calendar.dart';
 
 class Dashboard extends StatelessWidget {
@@ -8,7 +9,7 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: dark,
+      backgroundColor: apnaDark,
       body: Column(
         children: [
           Expanded(
@@ -22,21 +23,17 @@ class Dashboard extends StatelessWidget {
                     color: Colors.black.withOpacity(0.5),
                   ),
                 ],
-                color: light,
+                color: apnaLight,
                 borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25)),
               ),
+              child: const Graphs(),
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 3,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Calendar(),
-            ),
+            child: Calendar(),
           )
         ],
       ),

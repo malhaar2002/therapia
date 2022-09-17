@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:therapia/models/graph_model.dart';
 import 'package:therapia/widgets/graphs.dart';
 import 'package:therapia/widgets/calendar.dart';
 

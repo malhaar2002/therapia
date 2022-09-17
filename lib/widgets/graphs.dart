@@ -7,24 +7,29 @@ class Graphs extends StatefulWidget {
   const Graphs({super.key});
 
   @override
-  State<Graphs> createState() => _GraphsState();
-
+  // ignore: no_logic_in_create_state
+  State<Graphs> createState() => _GraphsState(timeDuration:GraphModel.monthData);
 }
 
 class _GraphsState extends State<Graphs> {
-  late List<GraphModel> timeDuration;
+  List<GraphModel> timeDuration;
+  _GraphsState({required this.timeDuration});
 
-  final List<charts.Series<GraphModel, num>> series = [
-    charts.Series(
-      id: 'Weekly Graph',
-      // FIXME: timeDuration not working
-      // data: timeDuration,
-      data:  GraphModel.monthData,
-      domainFn: (GraphModel series, _) => series.day,
-      measureFn: (GraphModel series, _) => series.tremorIndex,
-      colorFn: (_, __) => charts.ColorUtil.fromDartColor(apnaDark),
-    )
-  ];
+  List<charts.Series<GraphModel, num>> series = [];
+
+  @override
+  void initState() {
+    super.initState();
+    series = [
+      charts.Series(
+        id: 'Weekly Graph',
+        data: timeDuration,
+        domainFn: (GraphModel series, _) => series.day,
+        measureFn: (GraphModel series, _) => series.tremorIndex,
+        colorFn: (_, __) => charts.ColorUtil.fromDartColor(apnaDark),
+      )
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +63,9 @@ class _GraphsState extends State<Graphs> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25)),
           color: apnaLight,
         ),
         width: 500,

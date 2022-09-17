@@ -11,8 +11,8 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  Duration duration = const Duration(minutes: 1);
-  Duration initialTime = const Duration(minutes: 1);
+  Duration duration = const Duration(seconds: 30);
+  Duration initialTime = const Duration(seconds: 30);
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   List<double> _accelerometerValues = [0, 0, 0];
   Timer? timer;
@@ -84,14 +84,13 @@ class _TestState extends State<Test> {
       appBar: AppBar(
         backgroundColor: apnaDark,
         title: const Text('Therapia'),
-        centerTitle: true,
         automaticallyImplyLeading: false,
      ),
  
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: apnaLight,
+          color: apnaDark,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,7 +106,7 @@ class _TestState extends State<Test> {
                       value: duration.inSeconds / initialTime.inSeconds,
                       strokeWidth: 12,
                       color: Colors.white,
-                      backgroundColor: apnaDark,
+                      backgroundColor: apnaLight,
                     ),
                     buildCountDown(),
                   ],
@@ -126,14 +125,14 @@ class _TestState extends State<Test> {
     if (duration == const Duration(seconds: 0)) {
       return const Icon(
         Icons.check,
-        color: apnaDark,
+        color: apnaLight,
         size: 110,
       );
     } else {
       return Center(
         child: Text(
           formatDuration(duration),
-          style: const TextStyle(color: apnaDark, fontSize: 35),
+          style: const TextStyle(color: apnaLight, fontSize: 35),
         ),
       );
     }
@@ -148,13 +147,13 @@ class _TestState extends State<Test> {
         }),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-          side: const BorderSide(width: 2.0, color: apnaDark),
+          side: const BorderSide(width: 2.0, color: apnaLight),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: const Text(
           "Finish",
-          style: TextStyle(color: apnaDark, fontSize: 20),
+          style: TextStyle(color: apnaLight, fontSize: 20),
         ),
       );
     } else {
@@ -165,7 +164,7 @@ class _TestState extends State<Test> {
           OutlinedButton(
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-              side: const BorderSide(width: 2.0, color: apnaDark),
+              side: const BorderSide(width: 2.0, color: apnaLight),
               shape: CircleBorder(),
             ),
             onPressed: () {
@@ -175,7 +174,7 @@ class _TestState extends State<Test> {
             },
             child: const Icon(
               Icons.timer_off,
-              color: apnaDark,
+              color: apnaLight,
               size: 50,
             ),
           ),

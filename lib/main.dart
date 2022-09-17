@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/screens/dashboard.dart';
+import 'package:therapia/screens/result.dart';
 import 'package:therapia/screens/test.dart';
 
 void main() {

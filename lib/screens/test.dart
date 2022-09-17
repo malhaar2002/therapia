@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:therapia/screens/result.dart';
 import '../constants/colors.dart';
 
 class Test extends StatefulWidget {
@@ -11,10 +12,10 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  Duration duration = const Duration(seconds: 30);
-  Duration initialTime = const Duration(seconds: 30);
+  Duration duration = const Duration(seconds: 20);
+  Duration initialTime = const Duration(seconds: 20);
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
-  List<double> _accelerometerValues = [0, 0, 0];
+  List<List> sensorData = [];
   Timer? timer;
 
   void startTimer() {
@@ -54,11 +55,12 @@ class _TestState extends State<Test> {
 
     _streamSubscriptions
         .add(accelerometerEvents.listen((AccelerometerEvent event) {
-          _accelerometerValues = <double>[event.x, event.y, event.z];
+      sensorData.add(<double>[event.x, event.y, event.z]);
     }));
   }
 
   void stopSensor() {
+    print(sensorData);
     for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
       subscription.cancel();
     }
@@ -134,8 +136,15 @@ class _TestState extends State<Test> {
     if (duration == const Duration(seconds: 0)) {
       return OutlinedButton(
         onPressed: (() {
-          Navigator.pop(context);
+          // Navigator.pop(context);
           stopSensor();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Result(
+                      sensorData: sensorData,
+                    )),
+          );
         }),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),

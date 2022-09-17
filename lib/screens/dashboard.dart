@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:therapia/widgets/calendar.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -44,6 +45,7 @@ class Dashboard extends StatelessWidget {
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
+              child: Calendar(),
             ),
           )
         ],

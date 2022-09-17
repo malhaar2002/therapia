@@ -99,5 +99,29 @@ class GraphModel {
       day: 15,
       tremorIndex: 0.3,
     ),
+    GraphModel(
+      day: 16,
+      tremorIndex: 0.4,
+    ),
+    GraphModel(
+      day: 17,
+      tremorIndex: 0.2,
+    ),
+    GraphModel(
+      day: 18,
+      tremorIndex: 0.4,
+    ),
+    GraphModel(
+      day: 19,
+      tremorIndex: 0.2,
+    ),
+    GraphModel(
+      day: 20,
+      tremorIndex: 0.4,
+    ),
+    GraphModel(
+      day: 21,
+      tremorIndex: 0.2,
+    ),
   ];
 }

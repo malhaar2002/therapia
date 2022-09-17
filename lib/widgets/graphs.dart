@@ -8,7 +8,8 @@ class Graphs extends StatefulWidget {
 
   @override
   // ignore: no_logic_in_create_state
-  State<Graphs> createState() => _GraphsState(timeDuration:GraphModel.monthData);
+  State<Graphs> createState() =>
+      _GraphsState(timeDuration: GraphModel.monthData);
 }
 
 class _GraphsState extends State<Graphs> {
@@ -68,12 +69,28 @@ class _GraphsState extends State<Graphs> {
               bottomRight: Radius.circular(25)),
           color: apnaLight,
         ),
-        width: 500,
-        height: 600,
-        padding: const EdgeInsets.all(50),
+        width: MediaQuery.of(context).size.width,
         child: charts.LineChart(
           series,
+          defaultRenderer: charts.LineRendererConfig(
+            includeArea: true,
+            stacked: true,
+            strokeWidthPx: 3,
+          ),
           animate: true,
+          domainAxis: const charts.NumericAxisSpec(
+            showAxisLine: false,
+            renderSpec: charts.NoneRenderSpec(),
+          ),
+          primaryMeasureAxis: const charts.NumericAxisSpec(
+            renderSpec: charts.NoneRenderSpec(),
+          ),
+          layoutConfig: charts.LayoutConfig(
+            leftMarginSpec: charts.MarginSpec.fixedPixel(0),
+            rightMarginSpec: charts.MarginSpec.fixedPixel(0),
+            topMarginSpec: charts.MarginSpec.fixedPixel(0),
+            bottomMarginSpec: charts.MarginSpec.fixedPixel(0),
+          ),
         ),
       ),
     );

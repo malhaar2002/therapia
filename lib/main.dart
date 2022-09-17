@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:therapia/screens/dashboard.dart';
+import 'package:therapia/screens/test.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Home());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: 'dashboard',
+      routes: {
+        'dashboard':(context) => const Dashboard(),
+        'test':(context) => const Test(),
+      },
+    ); 
+  }
 }

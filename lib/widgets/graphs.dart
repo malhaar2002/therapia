@@ -15,7 +15,7 @@ class _LineChartSample2State extends State<Graphs> {
     apnaDark.withBlue(150),
   ];
 
-  bool showAvg = false;
+  bool showWeek = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,9 @@ class _LineChartSample2State extends State<Graphs> {
               'Week',
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: () => setState(() {}),
+            onPressed: () => setState(() {
+              showWeek = true;
+            }),
           ),
           TextButton(
             child: const Text(
@@ -39,7 +41,9 @@ class _LineChartSample2State extends State<Graphs> {
                 color: Colors.white,
               ),
             ),
-            onPressed: () => setState(() {}),
+            onPressed: () => setState(() {
+              showWeek = false;
+            }),
           ),
         ],
       ),
@@ -54,7 +58,7 @@ class _LineChartSample2State extends State<Graphs> {
               color: apnaLight,
             ),
             child: LineChart(
-              showAvg ? avgData() : mainData(),
+              showWeek ? weekData() : monthData(),
             ),
           ),
         ],
@@ -115,7 +119,7 @@ class _LineChartSample2State extends State<Graphs> {
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 
-  LineChartData mainData() {
+  LineChartData monthData() {
     return LineChartData(
       gridData: FlGridData(
         show: false,
@@ -190,7 +194,7 @@ class _LineChartSample2State extends State<Graphs> {
     );
   }
 
-  LineChartData avgData() {
+  LineChartData weekData() {
     return LineChartData(
       lineTouchData: LineTouchData(enabled: false),
       gridData: FlGridData(

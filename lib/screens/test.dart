@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import '../constants/colors.dart';
@@ -82,6 +81,13 @@ class _TestState extends State<Test> {
         return true;
       },
       child: Scaffold(
+      appBar: AppBar(
+        backgroundColor: apnaDark,
+        title: const Text('Therapia'),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+     ),
+ 
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

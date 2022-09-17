@@ -11,8 +11,8 @@ class Graphs extends StatefulWidget {
 
 class _LineChartSample2State extends State<Graphs> {
   List<Color> gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
+    apnaDark,
+    apnaDark.withBlue(150),
   ];
 
   bool showAvg = false;
@@ -49,9 +49,8 @@ class _LineChartSample2State extends State<Graphs> {
             width: double.infinity,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25)
-              ),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25)),
               color: apnaLight,
             ),
             child: LineChart(

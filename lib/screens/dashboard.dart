@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
-import 'package:therapia/models/graph_model.dart';
 import 'package:therapia/widgets/graphs.dart';
 import 'package:therapia/widgets/calendar.dart';
 
@@ -16,20 +15,11 @@ class Dashboard extends StatelessWidget {
           Expanded(
             flex: 6,
             child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 1),
-                    blurRadius: 5,
-                    color: Colors.black.withOpacity(0.5),
-                  ),
-                ],
-                color: apnaLight,
-              ),
+              color: apnaLight,
               child: const Graphs(),
             ),
           ),
-          const SizedBox(height: 25),
+          const SizedBox(height: 10),
           const Expanded(
             flex: 8,
             child: Calendar(),

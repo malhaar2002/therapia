@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:therapia/models/graph_model.dart';
 import 'package:therapia/widgets/graphs.dart';
 import 'package:therapia/widgets/calendar.dart';
 
@@ -13,7 +14,7 @@ class Dashboard extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 6,
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -24,17 +25,36 @@ class Dashboard extends StatelessWidget {
                   ),
                 ],
                 color: apnaLight,
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(25),
-                    bottomRight: Radius.circular(25)),
               ),
               child: const Graphs(),
             ),
           ),
+          const SizedBox(height: 25),
           const Expanded(
-            flex: 3,
+            flex: 8,
             child: Calendar(),
-          )
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'test');
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(13.0))),
+                  backgroundColor: MaterialStateProperty.all(apnaLight),
+                  padding: MaterialStateProperty.all(
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+                ),
+                child: const Text("Take Test",
+                    style: TextStyle(fontSize: 20, color: apnaDark)),
+              ),
+            ),
+          ),
+          const SizedBox(height: 25),
         ],
       ),
     );

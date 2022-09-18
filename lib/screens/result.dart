@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:therapia/constants/colors.dart';
+import 'package:dio/dio.dart';
+import 'dart:convert';
 
 class Result extends StatefulWidget {
   const Result({Key? key, required this.sensorData}) : super(key: key);
@@ -19,14 +21,18 @@ class _ResultState extends State<Result> {
   bool showWeek = false;
   List<FlSpot> localList = [];
 
+  getData() async {
+    var dio = Dio();
+    String listToString = '${widget.sensorData}';
+    final response =
+        await dio.post('http://192.168.7.33:5000', data: {"acc": listToString});
+    return response.data['xf'];
+  }
+
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      for (int i = 0; i < widget.sensorData.length; i++) {
-        localList.add(FlSpot(i.toDouble(), widget.sensorData[i][0]));
-      }
-    });
     super.initState();
+    localList = getData();
   }
 
   @override

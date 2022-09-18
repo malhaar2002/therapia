@@ -128,7 +128,7 @@ class _LineChartSample2State extends State<Graphs> {
         verticalInterval: 1,
       ),
       titlesData: FlTitlesData(
-        show: true,
+        show: false,
         rightTitles: AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),

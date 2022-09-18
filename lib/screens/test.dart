@@ -56,11 +56,11 @@ class _TestState extends State<Test> {
     _streamSubscriptions
         .add(accelerometerEvents.listen((AccelerometerEvent event) {
       sensorData.add(<double>[event.x, event.y, event.z]);
+      print(sensorData);
     }));
   }
 
   void stopSensor() {
-    print(sensorData);
     for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
       subscription.cancel();
     }
@@ -166,7 +166,7 @@ class _TestState extends State<Test> {
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
               side: const BorderSide(width: 2.0, color: apnaLight),
-              shape: CircleBorder(),
+              shape: const CircleBorder(),
             ),
             onPressed: () {
               stopTimer();

@@ -26,7 +26,8 @@ class _ResultState extends State<Result> {
     String listToString = '${widget.sensorData}';
     var response = await dio
         .post('https://therap.herokuapp.com/', data: {"acc": listToString});
-    String maxFrequency = response.data['maxFrequency'];
+    String maxFrequencyString = response.data['maxFrequency'];
+    double maxFrequency = double.parse(maxFrequencyString);
     print(maxFrequency);
   }
 

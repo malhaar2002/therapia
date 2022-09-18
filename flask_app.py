@@ -16,7 +16,7 @@ def index():
     xf, yf = freq(acc)
     print(xf)
     print(yf)
-    return jsonify({'xf':str(np.round_(xf, decimals = 4)), 'yf':str(round(abs(yf), decimals = 4))})
+    return jsonify({'xf':str(np.round_(xf, decimals = 4)), 'yf':str(np.round_(abs(yf), decimals = 4))})
 
 
 if __name__ == "__main__":

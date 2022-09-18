@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sensors_plus/sensors_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:therapia/screens/dashboard.dart';
 import 'package:therapia/screens/result.dart';
 import '../constants/colors.dart';
 
@@ -17,6 +20,15 @@ class _TestState extends State<Test> {
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   List<List> sensorData = [];
   Timer? timer;
+
+  Future<void> addDate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> currData = (await prefs.getStringList('toHighlight')) ?? [];
+    currData.add(DateFormat("yyyy-MM-dd").format(DateTime(2022, 09, 12)));
+    Set<String> currDataSet = {...currData};
+    await prefs.setStringList('toHighlight', currDataSet.toList());
+    await prefs.setStringList('sensorData', ["5", "6", "3", "4", "10"]);
+  }
 
   void startTimer() {
     timer = Timer.periodic(
@@ -56,7 +68,6 @@ class _TestState extends State<Test> {
     _streamSubscriptions
         .add(accelerometerEvents.listen((AccelerometerEvent event) {
       sensorData.add(<double>[event.x, event.y, event.z]);
-      print(sensorData);
     }));
   }
 
@@ -75,16 +86,15 @@ class _TestState extends State<Test> {
         return true;
       },
       child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: apnaDark,
-        title: const Text('Therapia'),
-        automaticallyImplyLeading: false,
-     ),
- 
+        appBar: AppBar(
+          backgroundColor: apnaDark,
+          title: const Text('Therapia'),
+          automaticallyImplyLeading: false,
+        ),
         body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: apnaDark,
+          color: apnaLight,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +110,7 @@ class _TestState extends State<Test> {
                       value: duration.inSeconds / initialTime.inSeconds,
                       strokeWidth: 12,
                       color: Colors.white,
-                      backgroundColor: apnaLight,
+                      backgroundColor: apnaDark,
                     ),
                     buildCountDown(),
                   ],
@@ -119,14 +129,14 @@ class _TestState extends State<Test> {
     if (duration == const Duration(seconds: 0)) {
       return const Icon(
         Icons.check,
-        color: apnaLight,
+        color: apnaDark,
         size: 110,
       );
     } else {
       return Center(
         child: Text(
           formatDuration(duration),
-          style: const TextStyle(color: apnaLight, fontSize: 35),
+          style: const TextStyle(color: apnaDark, fontSize: 35),
         ),
       );
     }
@@ -138,23 +148,21 @@ class _TestState extends State<Test> {
         onPressed: (() {
           // Navigator.pop(context);
           stopSensor();
+          addDate();
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => Result(
-                      sensorData: sensorData,
-                    )),
+            MaterialPageRoute(builder: (context) => Dashboard()),
           );
         }),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-          side: const BorderSide(width: 2.0, color: apnaLight),
+          side: const BorderSide(width: 2.0, color: apnaDark),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         child: const Text(
           "Finish",
-          style: TextStyle(color: apnaLight, fontSize: 20),
+          style: TextStyle(color: apnaDark, fontSize: 20),
         ),
       );
     } else {
@@ -165,7 +173,7 @@ class _TestState extends State<Test> {
           OutlinedButton(
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-              side: const BorderSide(width: 2.0, color: apnaLight),
+              side: const BorderSide(width: 2.0, color: apnaDark),
               shape: const CircleBorder(),
             ),
             onPressed: () {
@@ -175,7 +183,7 @@ class _TestState extends State<Test> {
             },
             child: const Icon(
               Icons.timer_off,
-              color: apnaLight,
+              color: apnaDark,
               size: 50,
             ),
           ),

@@ -12,7 +12,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  List<String> toHighapnaLight = [];
+  List<String> toHighlight = [];
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _CalendarState extends State<Calendar> {
 
   void getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    toHighapnaLight = (await prefs.getStringList('toHighapnaLight')) ?? [];
+    toHighlight = (await prefs.getStringList('toHighlight')) ?? [];
     setState(() {});
   }
 
@@ -33,8 +33,8 @@ class _CalendarState extends State<Calendar> {
       child: TableCalendar(
         calendarBuilders: CalendarBuilders(
           defaultBuilder: (context, day, focusedDay) {
-            if (toHighapnaLight != []) {
-              for (String date in toHighapnaLight) {
+            if (toHighlight != []) {
+              for (String date in toHighlight) {
                 DateTime d = DateFormat("yyyy-MM-dd").parse(date);
                 if (day.day == d.day &&
                     day.month == d.month &&
@@ -43,7 +43,7 @@ class _CalendarState extends State<Calendar> {
                     margin: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xff00c29a),
+                      color: apnaGreen,
                     ),
                     child: const Center(
                       child: Icon(Icons.check, color: Colors.white),
@@ -55,8 +55,8 @@ class _CalendarState extends State<Calendar> {
             return null;
           },
           todayBuilder: (context, day, focusedDay) {
-            if (toHighapnaLight != []) {
-              for (String date in toHighapnaLight) {
+            if (toHighlight != []) {
+              for (String date in toHighlight) {
                 DateTime d = DateFormat("yyyy-MM-dd").parse(date);
                 if (day.day == d.day &&
                     day.month == d.month &&
@@ -65,7 +65,7 @@ class _CalendarState extends State<Calendar> {
                     margin: const EdgeInsets.all(6),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xff00c29a),
+                      color: apnaGreen,
                     ),
                     child: Center(
                       child: Text(DateTime.now().day.toString(),
@@ -94,13 +94,9 @@ class _CalendarState extends State<Calendar> {
         headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleTextStyle: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-            leftChevronIcon:
-                Icon(Icons.chevron_left, color: Colors.white),
-            rightChevronIcon:
-                Icon(Icons.chevron_right, color: Colors.white)),
+                fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+            leftChevronIcon: Icon(Icons.chevron_left, color: Colors.white),
+            rightChevronIcon: Icon(Icons.chevron_right, color: Colors.white)),
         //##################################################
         calendarStyle: const CalendarStyle(
           todayTextStyle: TextStyle(color: Colors.black),

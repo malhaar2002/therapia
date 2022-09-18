@@ -3,9 +3,14 @@ import 'package:therapia/constants/colors.dart';
 import 'package:therapia/widgets/graphs.dart';
 import 'package:therapia/widgets/calendar.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +33,9 @@ class Dashboard extends StatelessWidget {
             flex: 1,
             child: Center(
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'test');
+                onPressed: () async {
+                  final result = await Navigator.pushNamed(context, 'test')
+                      .then((value) => setState(() => {}));
                 },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

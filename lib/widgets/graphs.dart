@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:therapia/constants/colors.dart';
 
 class Graphs extends StatefulWidget {
@@ -10,6 +12,11 @@ class Graphs extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<Graphs> {
+  List<String> toHighlight = [];
+  List<String> sensorData = [];
+  List<double> dates = [];
+  List<FlSpot> spots = [FlSpot(0, 0)];
+
   List<Color> gradientColors = [
     apnaDark,
     apnaDark.withBlue(150),
@@ -18,10 +25,36 @@ class _LineChartSample2State extends State<Graphs> {
   bool showWeek = false;
 
   @override
+  void initState() {
+    super.initState();
+    getEditData();
+  }
+
+  Future<void> getEditData() async {
+    List<int> numberList = List<int>.generate(30, (i) => i + 1);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    toHighlight = (await prefs.getStringList('toHighlight')) ?? [];
+    sensorData = (await prefs.getStringList('sensorData')) ?? [];
+
+    for (var i = 0; i < toHighlight.length; i++) {
+      spots.add(FlSpot(
+          DateFormat("yyyy-MM-dd").parse(toHighlight[i]).day.toDouble(),
+          double.parse(sensorData[i])));
+    }
+
+    print(toHighlight);
+    print(sensorData);
+    print(spots);
+
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: apnaDark,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: apnaDark,
         title: const Text('Therapia'),
         actions: [
@@ -57,8 +90,11 @@ class _LineChartSample2State extends State<Graphs> {
                   bottomRight: Radius.circular(25)),
               color: apnaLight,
             ),
-            child: LineChart(
-              showWeek ? weekData() : monthData(),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 15.0),
+              child: LineChart(
+                showWeek ? weekData() : monthData(),
+              ),
             ),
           ),
         ],
@@ -122,9 +158,9 @@ class _LineChartSample2State extends State<Graphs> {
   LineChartData monthData() {
     return LineChartData(
       gridData: FlGridData(
-        show: false,
+        show: true,
         drawVerticalLine: false,
-        horizontalInterval: 1,
+        horizontalInterval: 2,
         verticalInterval: 1,
       ),
       titlesData: FlTitlesData(
@@ -154,20 +190,14 @@ class _LineChartSample2State extends State<Graphs> {
       ),
       borderData: FlBorderData(show: false),
       minX: 0,
-      maxX: 11,
+      maxX: toHighlight.length.toDouble() == 0
+          ? 30
+          : toHighlight.length.toDouble() + 10,
       minY: 0,
-      maxY: 6,
+      maxY: 20,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
-          ],
+          spots: spots,
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,

@@ -35,9 +35,9 @@ from scipy.fft import rfft, rfftfreq
 def freq(acc, sample_rate = 208):
     ax, ay, az = [], [], []
     for j in acc:
-        ax.append(j[0])
-        ay.append(j[1])
-        az.append(j[2])
+        ax.append(float(j[0]))
+        ay.append(float(j[1]))
+        az.append(float(j[2]))
 
     steps = 30/len(ax)
     time = []

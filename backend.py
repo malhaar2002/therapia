@@ -1,13 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.fft import rfft, rfftfreq
 
 def freq(acc, sample_rate = 208):
     ax, ay, az = [], [], []
     for j in acc:
-        ax.append(float(j[0]))
-        ay.append(float(j[1]))
-        az.append(float(j[2]))
+        ax.append(j[0])
+        ay.append(j[1])
+        az.append(j[2])
     steps = 30/len(ax)
     time = []
     for x in range(len(ax)):
@@ -32,4 +31,6 @@ def freq(acc, sample_rate = 208):
     xf = rfftfreq(len(time), 1/sample_rate)
     return xf, yf
 
-print(freq([['1', '2', '3'], ['2', '3', '4']]))
+xf, yf = freq([[23.234, 345.21343, 32.34523], [234, 34.23523, 2435.13462345]])
+print(xf)
+print(yf)

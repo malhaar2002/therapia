@@ -24,15 +24,16 @@ class _ResultState extends State<Result> {
   getData() async {
     var dio = Dio();
     String listToString = '${widget.sensorData}';
-    final response =
-        await dio.post('http://192.168.7.33:5000', data: {"acc": listToString});
-    return response.data['xf'];
+    var response = await dio
+        .post('https://therap.herokuapp.com/', data: {"acc": listToString});
+    String maxFrequency = response.data['maxFrequency'];
+    print(maxFrequency);
   }
 
   @override
   void initState() {
     super.initState();
-    localList = getData();
+    getData();
   }
 
   @override

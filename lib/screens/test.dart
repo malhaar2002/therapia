@@ -12,8 +12,8 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  Duration duration = const Duration(seconds: 20);
-  Duration initialTime = const Duration(seconds: 20);
+  Duration duration = const Duration(seconds: 10);
+  Duration initialTime = const Duration(seconds: 10);
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   List<List> sensorData = [];
   Timer? timer;
@@ -56,7 +56,7 @@ class _TestState extends State<Test> {
     _streamSubscriptions
         .add(accelerometerEvents.listen((AccelerometerEvent event) {
       sensorData.add(<double>[event.x, event.y, event.z]);
-      print(sensorData);
+      // print(sensorData);
     }));
   }
 

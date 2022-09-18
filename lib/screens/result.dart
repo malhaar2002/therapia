@@ -21,18 +21,12 @@ class _ResultState extends State<Result> {
   bool showWeek = false;
   List<FlSpot> localList = [];
 
-  getData() async {
-    var dio = Dio();
-    String listToString = '${widget.sensorData}';
-    final response =
-        await dio.post('http://192.168.7.33:5000', data: {"acc": listToString});
-    return response.data['xf'];
-  }
+  
 
   @override
   void initState() {
     super.initState();
-    localList = getData();
+    
   }
 
   @override

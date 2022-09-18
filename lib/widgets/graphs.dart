@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +18,7 @@ class _LineChartSample2State extends State<Graphs> {
   List<String> sensorData = [];
   List<double> dates = [];
   List<FlSpot> spots = [FlSpot(0, 0)];
+  double maxData = 5;
 
   List<Color> gradientColors = [
     apnaDark,
@@ -37,6 +40,10 @@ class _LineChartSample2State extends State<Graphs> {
     sensorData = (await prefs.getStringList('sensorData')) ?? [];
 
     for (var i = 0; i < toHighlight.length; i++) {
+      if (double.parse(sensorData[i]) > maxData) {
+        maxData = double.parse(sensorData[i]);
+      }
+
       spots.add(FlSpot(
           DateFormat("yyyy-MM-dd").parse(toHighlight[i]).day.toDouble(),
           double.parse(sensorData[i])));
@@ -190,11 +197,9 @@ class _LineChartSample2State extends State<Graphs> {
       ),
       borderData: FlBorderData(show: false),
       minX: 0,
-      maxX: toHighlight.length.toDouble() == 0
-          ? 30
-          : toHighlight.length.toDouble() + 10,
+      maxX: 30,
       minY: 0,
-      maxY: 20,
+      maxY: maxData,
       lineBarsData: [
         LineChartBarData(
           spots: spots,

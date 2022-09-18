@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -15,19 +16,23 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  Duration duration = const Duration(seconds: 20);
-  Duration initialTime = const Duration(seconds: 20);
+  Duration duration = const Duration(seconds: 30);
+  Duration initialTime = const Duration(seconds: 30);
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
   List<List> sensorData = [];
   Timer? timer;
 
-  Future<void> addDate() async {
+  Future<void> addDate(double mf) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> currData = (await prefs.getStringList('toHighlight')) ?? [];
-    currData.add(DateFormat("yyyy-MM-dd").format(DateTime(2022, 09, 12)));
+    currData.add(DateFormat("yyyy-MM-dd").format(DateTime.now()));
     Set<String> currDataSet = {...currData};
+
+    List<String> currSenData = (await prefs.getStringList('sensorData')) ?? [];
+    currSenData.add(mf.toString());
+
     await prefs.setStringList('toHighlight', currDataSet.toList());
-    await prefs.setStringList('sensorData', ["5", "6", "3", "4", "10"]);
+    await prefs.setStringList('sensorData', currSenData);
   }
 
   void startTimer() {
@@ -58,6 +63,17 @@ class _TestState extends State<Test> {
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
     return '$hours:$minutes:$seconds';
+  }
+
+  Future<double> getData() async {
+    var dio = Dio();
+    String listToString = '${sensorData}';
+    var response = await dio
+        .post('https://therap.herokuapp.com/', data: {"acc": listToString});
+    String maxFrequencyString = response.data['maxFrequency'];
+    double maxFrequency = double.parse(maxFrequencyString);
+    print(maxFrequency);
+    return maxFrequency;
   }
 
   @override
@@ -145,14 +161,16 @@ class _TestState extends State<Test> {
   Widget buildButton() {
     if (duration == const Duration(seconds: 0)) {
       return OutlinedButton(
-        onPressed: (() {
+        onPressed: (() async {
           // Navigator.pop(context);
           stopSensor();
-          addDate();
+          double mf = await getData();
+          addDate(mf);
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) => Dashboard(),
+              ));
         }),
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),

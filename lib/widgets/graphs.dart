@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -201,8 +199,7 @@ class _LineChartSample2State extends State<Graphs> {
       minY: 0,
       maxY: maxData,
       lineBarsData: [
-        LineChartBarData(
-          spots: spots,
+        LineChartBarData( spots: spots,
           isCurved: true,
           gradient: LinearGradient(
             colors: gradientColors,

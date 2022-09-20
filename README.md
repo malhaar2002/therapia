@@ -6,5 +6,5 @@
 
 <p>Introducing Therapia: a simple way to keep track of these tremors sparing only a minute per day, using nothing but your very own smartphone! </p>
 
-<img src = "https://user-images.githubusercontent.com/58373047/190873365-474c734e-4316-46eb-8e82-9d3caa1e150c.jpg" width = 300>
+<img src = "https://user-images.githubusercontent.com/58373047/191168710-8b637a95-7a04-4afe-934b-79d8cddfac6d.jpeg" width = 300>
 <img src = "https://user-images.githubusercontent.com/58373047/190873369-9bb2bcf4-cb91-4ea8-910b-298ed90c123e.jpg" width = 300>

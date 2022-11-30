@@ -18,6 +18,10 @@ dependencies:
   fl_chart: ^0.55.1
   dio: ^4.0.6
   intl: ^0.17.0
+  csv: ^5.0.1
+  path_provider: ^2.0.11
+  permission_handler: ^10.2.0
+  excel: ^1.1.5
 
 dev_dependencies:
   flutter_test:

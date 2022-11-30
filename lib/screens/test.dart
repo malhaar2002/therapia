@@ -72,7 +72,6 @@ class _TestState extends State<Test> {
         .post('https://therap.herokuapp.com/', data: {"acc": listToString});
     String maxFrequencyString = response.data['maxFrequency'];
     double maxFrequency = double.parse(maxFrequencyString);
-    print(maxFrequency);
     return maxFrequency;
   }
 
